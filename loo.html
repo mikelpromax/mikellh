@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikel Gemayel.com</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: #f0f0f0;
+        background-image: url('https://www.gallerycollection.com/blog/wp-content/uploads/2022/11/christmas-greetings-1629475661.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+        background-attachment: fixed;
+        overflow: auto;
+        position: relative;
+      }
+
+      h1 {
+        color: red;
+        text-align: center;
+        z-index: 10000;
+        position: relative;
+        font-size: 3em;
+        margin-top: 100px;
+      }
+
+      .snowflake {
+        position: absolute;
+        top: -10px;
+        background-color: white;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        opacity: 0.8;
+        animation: fall linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          top: -10px;
+          left: 0;
+          opacity: 0.8;
+        }
+        100% {
+          top: 100vh;
+          left: calc(100% * var(--random-x));
+          opacity: 0.5;
+        }
+      }
+
+      button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 12px 24px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 5px;
+        cursor: pointer;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #45a049;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+
+      button:active {
+        background-color: #397739;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(2px);
+      }
+
+      button i {
+        font-size: 18px;
+        margin-right: 8px;
+      }
+
+      #snow-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .content {
+        position: relative;
+        z-index: 10;
+        padding: 20px;
+      }
+
+      #r {
+        text-align: center;
+        font-size: 1.5em;
+        color: #333;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="content">
+      <h1><b><i>Merry Christmas</i></b></h1>
+      <div id="r"></div>
+
+      <div style="text-align: center;">
+        <button onclick="st()"><i>📜</i>Read the full Christmas Story</button>
+        <button onclick="k()"><i>🎬</i>Best Christmas movie to watch</button>
+        <button onclick="ok()"><i>🎄</i>Days until Christmas</button>
+      </div>
+    </div>
+
+    <div id="snow-container"></div>
+
+
+
+    <div id="player-container"></div>
+
+
+    <button onclick="playMusic()">Play</button>
+    <button onclick="pauseMusic()">Pause</button>
+    <button onclick="stopMusic()">Stop</button>
+    <style>
+  /* Snowflake Styling */
+  .snowflake {
+    position: absolute;
+    top: -10px;
+    background-color: white;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% {
+      top: -10px;
+      left: calc(100% * var(--random-x)); /* Using custom property for horizontal position */
+      opacity: 0.8;
+    }
+    100% {
+      top: 100vh; /* 100vh ensures it falls to the bottom */
+      left: calc(100% * var(--random-x)); /* Maintain the random horizontal position */
+      opacity: 0.5;
+    }
+  }
+</style>
+
+<script>
+      let snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+
+      // Randomizing size of snowflakes
+  function createSnowflakes() {
+    for (let i = 0; i < 200; i++) {
+      let snowflakeSize = Math.random() * 10 + 'px';
+      snowflake.style.width = snowflakeSize;
+      snowflake.style.height = snowflakeSize;
+
+      // Randomizing animation speed
+      let speed = Math.random() * 5 + 2;
+      snowflake.style.animationDuration = speed + 's';
+
+      // Randomizing the X position using the custom property
+      let randomX = Math.random(); // Random horizontal position between 0 and 1
+      snowflake.style.setProperty('--random-x', randomX);
+
+      // Random starting position horizontally
+      snowflake.style.left = Math.random() * 100 + '%';
+
+      document.getElementById("snow-container").appendChild(snowflake);
+    }
+  }
+
+  window.onload = createSnowflakes;
+</script>
+<script>
+      let date = new Date();
+      let od = date.getDate();
+      let d = 25 - od;
+      let o = "There are " + d + " days remaining till Christmas";
+
+      function ok() {
+        toggleContent("Days until Christmas", o);
+      }
+
+      function k() {
+        toggleContent("Best Christmas movie to watch", "It is Home Alone, which is very funny and wise.");
+      }
+
+      function st() {
+        toggleContent("Full Christmas Story", `
+          The Gospel of Jesus Christ according to Saint Matthew (from the Bible):
+
+          1:1 The genealogy of Jesus Christ, the son of David, the son of Abraham:
+
+          Abraham was the father of Isaac, Isaac the father of Jacob, and Jacob the father of Judah and his brothers.
+          Judah the father of Perez and Zerah, whose mother was Tamar, Perez the father of Hezron, Hezron the father of Ram,
+          Ram the father of Amminadab, Amminadab the father of Nahshon, Nahshon the father of Salmon,
+          Salmon the father of Boaz, whose mother was Rahab, Boaz the father of Obed, whose mother was Ruth,
+          Obed the father of Jesse, and Jesse the father of King David.
+          David was the father of Solomon, whose mother had been Uriah's wife,
+          Solomon the father of Rehoboam, Rehoboam the father of Abijah, Abijah the father of Asa,
+          Asa the father of Jehoshaphat, Jehoshaphat the father of Joram, Joram the father of Uzziah,
+          Uzziah the father of Jotham, Jotham the father of Ahaz, Ahaz the father of Hezekiah,
+          Hezekiah the father of Manasseh, Manasseh the father of Amon, Amon the father of Josiah,
+          Josiah the father of Jeconiah and his brothers at the time of the exile to Babylon.
+
+          After the exile to Babylon: Jeconiah the father of Shealtiel, Shealtiel the father of Zerubbabel,
+          Zerubbabel the father of Abiud, Abiud the father of Eliakim, Eliakim the father of Azor,
+          Azor the father of Zadok, Zadok the father of Achim, Achim the father of Eliud,
+          Eliud the father of Eleazar, Eleazar the father of Matthan, Matthan the father of Jacob,
+          Jacob the father of Joseph, the husband of Mary, and Mary was the mother of Jesus, who is called the Messiah.
+
+          1:18 This is how the birth of Jesus the Messiah came about:
+          His mother Mary was pledged to be married to Joseph, but before they came together, she was found to be pregnant through the Holy Spirit.
+          Because Joseph her husband was faithful to the law, and yet did not want to expose her to public disgrace, he had in mind to divorce her quietly.
+          But after he had considered this, an angel of the Lord appeared to him in a dream and said,
+          "Joseph son of David, do not be afraid to take Mary home as your wife, because what is conceived in her is from the Holy Spirit.
+          She will give birth to a son, and you are to give him the name Jesus, because he will save his people from their sins."
+        `);
+      }
+
+      function toggleContent(buttonName, content) {
+        let r = document.getElementById("r");
+
+        if (r.innerHTML === content) {
+          r.innerHTML = '';
+          console.log(buttonName + " content removed");
+        } else {
+          r.innerHTML = content;
+          console.log(buttonName + " content shown");
+        }
+      }
+
+      function createSnowflakes() {
+        for (let i = 0; i < 200; i++) {
+          let snowflake = document.createElement('div');
+          snowflake.classList.add('snowflake');
+
+          snowflake.style.width = Math.random() * 10 + 'px';
+          snowflake.style.height = snowflake.style.width;
+
+          let speed = Math.random() * 5 + 2;
+          snowflake.style.animationDuration = speed + 's';
+
+          let randomX = Math.random();
+          snowflake.style.setProperty('--random-x', randomX);
+
+          snowflake.style.left = Math.random() * 100 + '%';
+
+          document.getElementById("snow-container").appendChild(snowflake);
+        }
+      }
+
+      window.onload = createSnowflakes;
+    </script>
+
+    <script src="https://www.youtube.com/iframe_api">
+      const playlist = [
+        '3Jf5aWQUJ0s', // Jingle Bells
+        'd6i2g1pcoRY', // Petit Papa Noël
+        'R9PUaT1-JJw', // Vive le Vent
+        'lFv5C5Xz3m4', // Laylit 3id (Fairouz)
+        'dL4R3b6Ctmw', // Dans une Boîte en Carton
+        '2y7Hfe4xJzM'  // Mon Beau Sapin
+      ];
+
+      let player;
+      let currentSongIndex = 0;
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player-container', {
+          videoId: playlist[currentSongIndex],
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+          currentSongIndex = (currentSongIndex + 1) % playlist.length;
+          player.loadVideoById(playlist[currentSongIndex]);
+        }
+      }
+
+      function playMusic() {
+        player.playVideo();
+      }
+
+      function pauseMusic() {
+        player.pauseVideo();
+      }
+
+      function stopMusic() {
+        player.stopVideo();
+      }
+
+      function changeVolume(volume) {
+        player.setVolume(volume);
+      }
+    </script>
+  <script> const facts = [
+            "The tradition of the Christmas tree dates back to 16th century Germany.",
+            "The first artificial Christmas tree was made in Germany out of goose feathers.",
+            "In the UK, Christmas pudding is traditionally served with a sprig of holly on top.",
+            "Santa Claus was inspired by a real person, Saint Nicholas, a 4th-century bishop in Turkey.",
+            "The world's largest Christmas stocking was 106 feet long and 49 feet wide!"
+        ];
+
+        function showFact() {
+            const factIndex = new Date().getDate() % facts.length; // Shows a new fact every day
+            document.getElementById("fact").innerText = facts[factIndex];</script>
+    <input type="range" min="0" max="100" value="100" id="volumeSlider" onchange="changeVolume(this.value)">
+  </body>
+</html>
